@@ -20,7 +20,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import {
-  Home as HomeIcon,
+  Home,
   Heart,
   User,
   ShoppingCart,
@@ -55,6 +55,7 @@ const Navbar: React.FC = () => {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [selectedPincode, setSelectedPincode] = useState('Select Pincode');
+  const [pincodeOpen, setPincodeOpen] = useState(false);
 
 
   const navItems = [
@@ -67,7 +68,6 @@ const Navbar: React.FC = () => {
 
 
   const moreItems = [
-    { path: '/', label: t.home, icon: '🏠', iconComponent: HomeIcon },
     { path: '/schemes', label: t.sarkariYojana, icon: '🏛️', iconComponent: Shield },
     { path: '/nearby', label: t.nearbyHospitals, icon: '🏥', iconComponent: Hospital },
   ];
