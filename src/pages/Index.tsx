@@ -68,7 +68,7 @@ const Index: React.FC = () => {
 
   useEffect(() => {
     if (searchQuery.trim().length > 1) {
-      const filtered = allSearchableItems.filter(item => 
+      const filtered = allSearchableItems.filter(item =>
         item.toLowerCase().includes(searchQuery.toLowerCase())
       ).slice(0, 5);
       setSuggestions(filtered);
@@ -129,8 +129,8 @@ const Index: React.FC = () => {
     if (file) {
       toast({
         title: language === 'hi' ? 'पर्चा अपलोड किया गया' : 'Prescription Uploaded',
-        description: language === 'hi' 
-          ? `${file.name} सफलतापूर्वक प्राप्त हुआ।` 
+        description: language === 'hi'
+          ? `${file.name} सफलतापूर्वक प्राप्त हुआ।`
           : `${file.name} has been received successfully.`,
       });
     }
@@ -260,60 +260,90 @@ const Index: React.FC = () => {
       <AppTutorial isOpen={showTutorial} onClose={() => setShowTutorial(false)} />
       <HealthNewsPopup />
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary via-primary to-chart-2 text-primary-foreground py-16 px-4 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <HeartPulse className="absolute top-10 left-10 w-32 h-32 text-primary-foreground/20 animate-float" style={{ animationDelay: '0s' }} />
-          <Hospital className="absolute top-20 right-20 w-24 h-24 text-primary-foreground/20 animate-float" style={{ animationDelay: '1s' }} />
-          <Pill className="absolute bottom-10 left-1/4 w-28 h-28 text-primary-foreground/20 animate-float" style={{ animationDelay: '2s' }} />
-          <Stethoscope className="absolute bottom-20 right-10 w-20 h-20 text-primary-foreground/20 animate-float" style={{ animationDelay: '1.5s' }} />
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative min-h-[90vh] flex items-center text-white overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="w-full h-full object-cover"
+          >
+            <source src="/video/video.mp4" type="video/mp4" />
+          </video>
+
+          {/* Overlay for readability */}
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 backdrop-blur-sm" />
         </div>
 
-        <div className="container mx-auto relative z-10">
-          <div className="max-w-3xl mx-auto text-center bg-primary-foreground/10 backdrop-blur-lg p-8 rounded-3xl shadow-xl">
-            <div className="w-24 h-24 bg-primary-foreground/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Heart className="w-12 h-12 animate-float" />
+        {/* Content */}
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm mb-6">
+              <Shield className="w-4 h-4" />
+              {language === 'hi'
+                ? 'विश्वसनीय डिजिटल स्वास्थ्य प्लेटफ़ॉर्म'
+                : 'Trusted Digital Health Platform'}
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
+            {/* Title */}
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
               {t.appName}
             </h1>
 
-            <p className="text-lg md:text-xl opacity-90 max-w-md mx-auto mb-8">
+            {/* Subtitle */}
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10">
               {language === 'hi'
-                ? 'आपका स्वास्थ्य, हमारी प्राथमिकता'
-                : 'Your health, our priority'}
+                ? 'आपका स्वास्थ्य, हमारी प्राथमिकता — सरल, सुरक्षित और हर समय उपलब्ध'
+                : 'Your health, our priority — simple, secure, and available anytime'}
             </p>
 
-            <Button
-              onClick={() => setShowTutorial(true)}
-              variant="secondary"
-              size="lg"
-              className="gap-2 shadow-lg"
-            >
-              <HelpCircle className="w-5 h-5" />
-              {language === 'hi'
-                ? 'ऐप कैसे इस्तेमाल करें?'
-                : 'How to use this app?'}
-            </Button>
-          </div>
-        </div>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-14">
+              <Button
+                size="lg"
+                className="gap-2 shadow-xl"
+                onClick={() => navigate('/symptoms')}
+              >
+                <Activity className="w-5 h-5" />
+                {language === 'hi' ? 'लक्षण जांचें' : 'Check Symptoms'}
+              </Button>
 
-        {/* Stats */}
-        <div className="container mx-auto mt-12">
-          <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center bg-primary-foreground/10 rounded-xl p-4">
-                <stat.icon className="w-6 h-6 mx-auto mb-2" />
-                <div className="text-2xl font-semibold">{stat.value}</div>
-                <div className="text-sm opacity-80">
-                  {language === 'hi' ? stat.labelHi : stat.labelEn}
+              <Button
+                size="lg"
+                variant="secondary"
+                className="bg-white text-primary"
+                onClick={() => setShowTutorial(true)}
+              >
+                <HelpCircle className="w-5 h-5" />
+                {language === 'hi' ? 'ऐप कैसे काम करता है' : 'How it works'}
+              </Button>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 max-w-xl mx-auto">
+              {stats.map((stat, i) => (
+                <div
+                  key={i}
+                  className="bg-white/20 backdrop-blur rounded-xl p-4"
+                >
+                  <stat.icon className="w-6 h-6 mx-auto mb-2" />
+                  <div className="text-2xl font-semibold">{stat.value}</div>
+                  <div className="text-sm text-white/80">
+                    {language === 'hi' ? stat.labelHi : stat.labelEn}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
+
 
       {/* Features/Our Services Section */}
       <section className="container mx-auto px-4 py-12">
@@ -390,12 +420,12 @@ const Index: React.FC = () => {
                     </div>
                   )}
                 </div>
-                
+
                 {/* Category Quick Links */}
                 <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4">
                   {['Medicine', 'Healthcare', 'Lab Tests', 'Doctor Consult', 'Offers'].map((cat) => (
-                    <button 
-                      key={cat} 
+                    <button
+                      key={cat}
                       onClick={() => {
                         setSearchQuery(cat);
                         navigate(`/store?search=${encodeURIComponent(cat)}`);
