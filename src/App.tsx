@@ -31,6 +31,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
 import Reminders from "@/pages/Reminders";
 import Offers from "@/components/Offers";
+import OfflineIndicator from "@/components/OfflineIndicator";
 
 const queryClient = new QueryClient();
 
@@ -117,14 +118,15 @@ const App = () => {
                 <BrowserRouter>
                   <ScrollToTopOnRouteChange />
                   <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-                    <Navbar/>
+                    <OfflineIndicator />
+                    <Navbar />
                     <Routes>
                       <Route path="/" element={<Index />} />
                       <Route path="/symptoms" element={<SymptomTracker />} />
                       <Route path="/tips" element={<HealthTips />} />
                       <Route path="/store" element={<MedicineStore />} />
                       <Route path="/medical-history" element={<MedicalHistoryPage />} />
-                  
+
                       <Route path="/assistant" element={<AIAssistant />} />
                       <Route path="/schemes" element={<SarkariYojana />} />
                       <Route path="/nearby" element={<NearbyHospitals />} />
