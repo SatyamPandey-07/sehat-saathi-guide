@@ -53,4 +53,33 @@ const startServer = async () => {
   }
 };
 
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+  logger.error('Uncaught Exception:', {
+    error: error.message,
+    stack: error.stack,
+  });
+  process.exit(1);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error('Unhandled Rejection:', {
+    reason,
+    promise,
+  });
+  process.exit(1);
+});
+
+// Handle graceful shutdown
+process.on('SIGTERM', () => {
+  logger.info('SIGTERM signal received: closing HTTP server');
+  process.exit(0);
+});
+
+process.on('SIGINT', () => {
+  logger.info('SIGINT signal received: closing HTTP server');
+  process.exit(0);
+});
+
 startServer();
