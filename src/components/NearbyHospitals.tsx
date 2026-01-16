@@ -300,12 +300,12 @@ const NearbyHospitals: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-foreground mb-2">
+    <div className=\"container mx-auto px-3 sm:px-4 py-6 sm:py-8\">
+      <div className=\"mb-6 sm:mb-8 text-center\">
+        <h1 className=\"text-2xl sm:text-3xl font-bold text-foreground mb-2\">
           {t.nearbyHospitals}
         </h1>
-        <p className="text-muted-foreground">
+        <p className=\"text-xs sm:text-sm md:text-base text-muted-foreground px-2\">
           {language === 'hi'
             ? 'आपके पास के अस्पताल और क्लिनिक'
             : 'Hospitals and clinics near you'}
@@ -316,8 +316,8 @@ const NearbyHospitals: React.FC = () => {
         <AsyncErrorFallback message={error} onRetry={handleRetry} />
       ) : (
         <>
-          <Card className="mb-8 border-2 border-border overflow-hidden">
-            <div className="relative h-64">
+          <Card className=\"mb-6 sm:mb-8 border-2 border-border overflow-hidden\">
+            <div className=\"relative h-48 sm:h-64 md:h-96\">
               {isLoadingLocation ? (
                 <div className="h-full bg-muted flex items-center justify-center">
                   <div className="text-center">
@@ -339,12 +339,12 @@ const NearbyHospitals: React.FC = () => {
           </Card>
 
           {isLoadingHospitals && (
-            <div className="text-center mb-4 text-muted-foreground">
+            <div className=\"text-center mb-4 text-xs sm:text-sm text-muted-foreground\">
               {language === 'hi' ? 'नजदीकी अस्पताल खोज रहे हैं...' : 'Finding nearby hospitals...'}
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6\">
             {hospitals.map((hospital) => (
               <Card
                 key={hospital.id}

@@ -261,7 +261,7 @@ const Index: React.FC = () => {
       <HealthNewsPopup />
 
       {/* ================= HERO SECTION ================= */}
-      <section className="relative min-h-[90vh] flex items-center text-white overflow-hidden">
+      <section className=\"relative min-h-[80vh] sm:min-h-[90vh] flex items-center text-white overflow-hidden\">
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
           <video
@@ -281,46 +281,46 @@ const Index: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <div className="max-w-4xl mx-auto">
+        <div className="relative z-10 container mx-auto px-3 sm:px-4 text-center">
+          <div className="max-w-4xl mx-auto space-y-3 sm:space-y-6">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm mb-6">
-              <Shield className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm mb-4 sm:mb-6">
+              <Shield className="w-3 sm:w-4 h-3 sm:h-4" />
               {language === 'hi'
                 ? 'विश्वसनीय डिजिटल स्वास्थ्य प्लेटफ़ॉर्म'
                 : 'Trusted Digital Health Platform'}
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-6 drop-shadow-lg leading-tight">
               {t.appName}
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10">
+            <p className="text-xs sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-6 sm:mb-10 px-2">
               {language === 'hi'
                 ? 'आपका स्वास्थ्य, हमारी प्राथमिकता — सरल, सुरक्षित और हर समय उपलब्ध'
                 : 'Your health, our priority — simple, secure, and available anytime'}
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-14">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-8 sm:mb-14">
               <Button
                 size="lg"
-                className="gap-2 shadow-xl"
+                className="gap-2 shadow-xl text-sm sm:text-base py-2 sm:py-3 h-auto"
                 onClick={() => navigate('/symptoms')}
               >
-                <Activity className="w-5 h-5" />
+                <Activity className="w-4 sm:w-5 h-4 sm:h-5" />
                 {language === 'hi' ? 'लक्षण जांचें' : 'Check Symptoms'}
               </Button>
 
               <Button
                 size="lg"
                 variant="secondary"
-                className="bg-white text-primary"
+                className="bg-white text-primary text-sm sm:text-base py-2 sm:py-3 h-auto"
                 onClick={() => setShowTutorial(true)}
               >
-                <HelpCircle className="w-5 h-5" />
+                <HelpCircle className="w-4 sm:w-5 h-4 sm:h-5" />
                 {language === 'hi' ? 'ऐप कैसे काम करता है' : 'How it works'}
               </Button>
             </div>
@@ -330,11 +330,11 @@ const Index: React.FC = () => {
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="bg-white/20 backdrop-blur rounded-xl p-4"
+                  className="bg-white/20 backdrop-blur rounded-lg sm:rounded-xl p-3 sm:p-4"
                 >
-                  <stat.icon className="w-6 h-6 mx-auto mb-2" />
-                  <div className="text-2xl font-semibold">{stat.value}</div>
-                  <div className="text-sm text-white/80">
+                  <stat.icon className="w-5 sm:w-6 h-5 sm:h-6 mx-auto mb-2" />
+                  <div className="text-xl sm:text-2xl font-semibold">{stat.value}</div>
+                  <div className="text-xs sm:text-sm text-white/80">
                     {language === 'hi' ? stat.labelHi : stat.labelEn}
                   </div>
                 </div>
@@ -346,27 +346,27 @@ const Index: React.FC = () => {
 
 
       {/* Features/Our Services Section */}
-      <section className="container mx-auto px-4 py-12">
-        <h2 className="text-2xl font-semibold text-center mb-8">
+      <section className="container mx-auto px-3 sm:px-4 py-8 sm:py-12">
+        <h2 className="text-xl sm:text-2xl font-semibold text-center mb-6 sm:mb-8">
           {language === 'hi' ? '🌟 हमारी सेवाएं' : '🌟 Our Services'}
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
           {features.map((feature) => (
             <Link key={feature.path} to={feature.path}>
-              <Card className="border-2 hover:shadow-xl transition-all hover:-translate-y-1 h-full overflow-hidden">
-                <CardContent className="p-0">
-                  <div className={`${feature.color} p-6 text-center`}>
-                    <feature.iconComponent className={`w-12 h-12 mx-auto ${feature.iconColor}`} />
+              <Card className="border-2 hover:shadow-xl transition-all hover:-translate-y-1 h-full overflow-hidden\">
+                <CardContent className="p-0\">
+                  <div className={`${feature.color} p-3 sm:p-6 text-center`}>
+                    <feature.iconComponent className={`w-8 sm:w-12 h-8 sm:h-12 mx-auto ${feature.iconColor}`} />
                   </div>
-                  <div className="p-4 text-center">
-                    <h3 className="font-medium mb-1">{language === 'hi' ? feature.labelHi : feature.label}</h3>
-                    <p className="text-sm text-muted-foreground">
+                  <div className="p-2 sm:p-4 text-center space-y-1">
+                    <h3 className="font-medium text-xs sm:text-sm line-clamp-2">{language === 'hi' ? feature.labelHi : feature.label}</h3>
+                    <p className="text-xs text-muted-foreground line-clamp-2">
                       {language === 'hi' ? feature.descHi : feature.descEn}
                     </p>
-                    <div className="mt-4 flex items-center justify-center text-primary gap-1">
-                      {language === 'hi' ? 'खोलें' : 'Open'}
-                      <ArrowRight className="w-4 h-4" />
+                    <div className="mt-2 sm:mt-4 flex items-center justify-center text-primary gap-1">
+                      <span className="text-xs sm:text-sm">{language === 'hi' ? 'खोलें' : 'Open'}</span>
+                      <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4" />
                     </div>
                   </div>
                 </CardContent>
