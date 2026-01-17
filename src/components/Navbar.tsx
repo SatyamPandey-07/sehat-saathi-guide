@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
+import NotificationBell from './notifications/NotificationBell';
 import { useTheme } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
 import {
@@ -161,9 +162,6 @@ const Navbar: React.FC = () => {
               </Button>
 
 
-              import NotificationBell from './notifications/NotificationBell';
-
-              // ...
               {/* Notifications */}
               {isAuthenticated && <NotificationBell />}
 
