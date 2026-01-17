@@ -70,4 +70,18 @@ router.put('/read-all', protect, async (req: AuthRequest, res: Response) => {
     }
 });
 
+/**
+ * @route   DELETE /api/notifications
+ * @desc    Clear all notifications for user
+ */
+router.delete('/', protect, async (req: AuthRequest, res: Response) => {
+    try {
+        const userId = (req.user as any)._id;
+        await Notification.deleteMany({ user: userId });
+        res.json({ message: 'All notifications cleared' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 export default router;

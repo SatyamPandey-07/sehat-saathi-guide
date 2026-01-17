@@ -75,12 +75,17 @@ const triggerNotification = async (reminder: any) => {
         const title = 'Health Reminder';
         const message = `It's time for: ${reminder.title}` + (reminder.dosage ? ` (${reminder.dosage})` : '');
 
+        // Map reminder type to notification type
+        let notificationType: 'medication' | 'appointment' | 'reminder' = 'reminder';
+        if (reminder.type === 'medicine') notificationType = 'medication';
+        else if (reminder.type === 'appointment') notificationType = 'appointment';
+
         // 1. Save to Database
         const notification = await Notification.create({
             user: reminder.userId,
             title,
             message,
-            type: 'reminder', // Using generic 'reminder' type from schema logic
+            type: notificationType,
             priority: 'high',
             metadata: { reminderId: reminder._id }
         });
