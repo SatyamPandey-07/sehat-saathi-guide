@@ -1,6 +1,6 @@
 import { Server as HttpServer } from 'http';
 import { Server, Socket } from 'socket.io';
-// import { verifyToken } from '../middleware/auth'; // You might need to refactor auth to verify token manually
+import { setupSignalingHandler } from '../sockets/signalingHandler';
 
 let io: Server;
 
@@ -13,10 +13,13 @@ export const initSocket = (httpServer: HttpServer) => {
                 "http://localhost:8080",
                 process.env.FRONTEND_URL || ""
             ].filter(Boolean),
-            methods: ["GET", "POST"],
+            methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
             credentials: true
         },
     });
+
+    // Setup WebRTC Signaling
+    setupSignalingHandler(io);
 
     io.on('connection', (socket: Socket) => {
         console.log('User connected via Socket.io:', socket.id);
