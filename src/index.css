@@ -43,8 +43,11 @@
 /* ===================== */
 @layer base {
   :root {
-    --background: 82 100% 94%;
-    --foreground: 150 30% 15%;
+ 
+ 
+   --background: 82 100% 94%;
+   --foreground: 150 30% 15%;
+
 
     --card: 0 0% 100%;
     --card-foreground: 150 30% 15%;
@@ -58,11 +61,13 @@
     --secondary: 82 100% 94%;
     --secondary-foreground: 142 72% 25%;
 
+
     --muted: 140 20% 94%;
     --muted-foreground: 150 15% 40%;
 
     --accent: 349 100% 83%;         /* #FFAAB8 */
     --accent-foreground: 150 30% 15%;
+
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
