@@ -11,6 +11,7 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
+  token: string | null;
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   register: (name: string, email: string, phone: string, password: string) => Promise<boolean>;
@@ -23,6 +24,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(localStorage.getItem('auth_token'));
   const [isLoading, setIsLoading] = useState(true);
   const [useBackend, setUseBackend] = useState(false);
 
@@ -32,17 +34,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const backendAvailable = await checkBackendHealth();
       setUseBackend(backendAvailable);
 
-      const token = localStorage.getItem('auth_token');
+      const savedToken = localStorage.getItem('auth_token');
       const savedUser = localStorage.getItem('user');
 
-      if (backendAvailable && token) {
+      if (backendAvailable && savedToken) {
         try {
           const data = await authAPI.getMe();
-          if (data.user) {
-            setUser(data.user);
+          if ((data as any).user) {
+            setUser((data as any).user);
+            setToken(savedToken);
           }
         } catch {
           localStorage.removeItem('auth_token');
+          setToken(null);
           if (savedUser) {
             setUser(JSON.parse(savedUser));
           }
@@ -70,9 +74,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       if (useBackend) {
         const data = await authAPI.login(email, password);
-        if (data.user && data.token) {
-          localStorage.setItem('auth_token', data.token);
-          setUser(data.user);
+        if ((data as any).user && (data as any).token) {
+          localStorage.setItem('auth_token', (data as any).token);
+          setToken((data as any).token);
+          setUser((data as any).user);
           return true;
         }
         return false;
@@ -82,7 +87,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const savedUsers = localStorage.getItem('registeredUsers');
       const users = savedUsers ? JSON.parse(savedUsers) : [];
       const foundUser = users.find((u: User) => u.email === email);
-      
+
       if (foundUser) {
         setUser(foundUser);
         return true;
@@ -97,9 +102,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       if (useBackend) {
         const data = await authAPI.register(name, email, phone, password);
-        if (data.user && data.token) {
-          localStorage.setItem('auth_token', data.token);
-          setUser(data.user);
+        if ((data as any).user && (data as any).token) {
+          localStorage.setItem('auth_token', (data as any).token);
+          setToken((data as any).token);
+          setUser((data as any).user);
           return true;
         }
         return false;
@@ -126,6 +132,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const logout = () => {
     setUser(null);
+    setToken(null);
     localStorage.removeItem('user');
     localStorage.removeItem('auth_token');
   };
@@ -138,8 +145,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           phone: updatedUser.phone,
           profilePic: updatedUser.profilePic,
         });
-        if (data.user) {
-          setUser(data.user);
+        if ((data as any).user) {
+          setUser((data as any).user);
           return;
         }
       }
@@ -164,6 +171,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     <AuthContext.Provider
       value={{
         user,
+        token,
         isAuthenticated: !!user,
         login,
         register,
