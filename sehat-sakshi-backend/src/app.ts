@@ -14,7 +14,7 @@ import analyticsRoutes from "./routes/analytics";
 import syncRoutes from "./routes/sync";
 import forumRoutes from "./routes/forum";
 import contactRoutes from "./routes/contact";
-import aiRoutes from "./routes/ai";
+import predictionRoutes from "./routes/prediction";
 import caregiverRoutes from "./routes/caregiver";
 
 const app = express();
@@ -74,6 +74,9 @@ app.get("/health", (_req, res) => {
   });
 });
 
+// Static files for uploads (if needed)
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+
 // API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/medical-history", medicalHistoryRoutes);
@@ -85,8 +88,13 @@ app.use("/api/analytics", analyticsRoutes);
 app.use("/api/sync", syncRoutes);
 app.use("/api/forum", forumRoutes);
 app.use("/api/contact", contactRoutes);
-app.use("/api/ai", aiRoutes);
+app.use("/api/prediction", predictionRoutes);
 app.use("/api/caregivers", caregiverRoutes);
+app.use("/api/ai", aiRoutes);
+
+// Error Handling
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 // Error Handling
 app.use(notFoundHandler);

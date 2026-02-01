@@ -13,6 +13,19 @@
 
 ---
 
+## 📊 Project Statistics
+
+### GitHub Stats
+
+![GitHub stars](https://img.shields.io/github/stars/Naman-iitm/sehat-saathi-guide?style=flat-square)
+![GitHub forks](https://img.shields.io/github/forks/Naman-iitm/sehat-saathi-guide?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/Naman-iitm/sehat-saathi-guide?style=flat-square)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/Naman-iitm/sehat-saathi-guide?style=flat-square)
+![GitHub license](https://img.shields.io/github/license/Naman-iitm/sehat-saathi-guide?style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/Naman-iitm/sehat-saathi-guide?style=flat-square)
+
+---
+
 [📖 Overview](#-overview) • [✨ Features](#-key-features) • [🏗️ Architecture](#-system-design) • [🚀 Get Started](#-installation) • [🤝 Support](#-contributing)
 
 </div>
@@ -100,14 +113,62 @@ Sehat Saathi is built to be inclusive. We currently support the following langua
 
  🛠️ TECH STACK
 
-- **Frontend**: [React 18](https://reactjs.org/) with [TypeScript](https://www.typescriptlang.org/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: [shadcn/ui](https://ui.shadcn.com/) (Radix UI)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **State Management**: [TanStack Query](https://tanstack.com/query/latest)
-- **Routing**: [React Router DOM](https://reactrouter.com/)
-- **Package Manager**: [Bun](https://bun.sh/) (Recommended) or [npm](https://www.npmjs.com/)
+| Technology | Usage | Badge |
+|------------|-------|-------|
+| Frontend Framework | Core | React |
+| Programming Language | Core | TypeScript |
+| Build Tool | Core | Vite |
+| Styling Framework | Core | Tailwind CSS |
+| UI Components | UI | Shadcn/ui |
+| Icons | UI | Lucide React |
+| State Management | Data | TanStack Query |
+| Routing | Navigation | React Router |
+| Maps | Features | Leaflet |
+| Data Visualization | Features | Recharts |
+| Backend Runtime | Server | Node.js |
+| Backend Framework | Server | Express |
+| Database | Data | MongoDB |
+| Real-time Communication | Communication | Socket.io |
+| Authentication | Security | JWT |
+
+### Tech Stack Graph
+
+```mermaid
+graph TD
+    A[Frontend] --> B[React]
+    A --> C[TypeScript]
+    A --> D[Vite]
+    A --> E[Tailwind CSS]
+    A --> F[Shadcn/ui]
+    A --> G[Lucide React]
+    A --> H[TanStack Query]
+    A --> I[React Router]
+    A --> J[Leaflet]
+    A --> K[Recharts]
+    
+    L[Backend] --> M[Node.js]
+    L --> N[Express]
+    L --> O[MongoDB]
+    L --> P[Socket.io]
+    L --> Q[JWT]
+    
+    B --> R[User Interface]
+    C --> R
+    D --> R
+    E --> R
+    F --> R
+    G --> R
+    H --> R
+    I --> R
+    J --> R
+    K --> R
+    
+    M --> S[API Server]
+    N --> S
+    O --> S
+    P --> S
+    Q --> S
+```
 
 ---
 
